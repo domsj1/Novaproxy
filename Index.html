@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Web Utility Console</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin-top: 40px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        p {
+            color: #7f8c8d;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        input[type="url"] {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+        }
+        input[type="url"]:focus {
+            border-color: #3498db;
+        }
+        button {
+            padding: 12px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .console-box {
+            margin-top: 20px;
+            background-color: #1e1e1e;
+            color: #a6e22e;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            min-height: 100px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Network Client Console</h1>
+        <p>Enter a target destination URL to log interface actions below.</p>
+        
+        <div class="input-group">
+            <input type="url" id="targetUrl" placeholder="http://example.com" required>
+            <button onclick="processRequest()">Submit Request</button>
+        </div>
+
+        <div class="console-box" id="consoleOutput">> System initialized. Waiting for input...</div>
+    </div>
+
+    <script>
+        function processRequest() {
+            const urlInput = document.getElementById('targetUrl').value.trim();
+            const consoleOutput = document.getElementById('consoleOutput');
+
+            if (!urlInput) {
+                consoleOutput.innerText = "> Error: Please enter a destination URL.";
+                return;
+            }
+
+            // Log the local intent to the UI
+            consoleOutput.innerText = `> Initializing request...\n> Targeting destination: ${urlInput}\n`;
+            consoleOutput.innerText += `> Note: Browser security policies (CORS) prevent direct cross-origin web requests completely inside static HTML frames. This destination must be processed through an active local developer backend server.`;
+        }
+    </script>
+
+</body>
+</html>
